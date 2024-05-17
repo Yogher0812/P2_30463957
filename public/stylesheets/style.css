@@ -1,111 +1,52 @@
-
 body {
+  background-image: url(https://w.wallhaven.cc/full/0p/wallhaven-0p2ve4.jpg);
+  background-size: cover;
+  margin: 0;
+  height: 100vh; 
+}
 
-  font-family: Arial, sans-serif;
-  
-  background-color: #f5f5f5;
-  
-  color: #333;
-  
-  margin: 65px;
-  
-  padding: 40px;
-  
-  }
-  
-  header {
-  
-  background-color: #5e0392;
-  
-  color: #fff;
-  
-  padding: 20px;
-  
-  }
-  
-  header h1 {
-  
-  font-size: 32px;
-  
-  margin: 0;
-  
-  }
-  
-  header h2 {
-  
-  font-size: 24px;
-  
-  margin: 0;
-  
-  }
-  
-   
-  
-  section {
-  
-  margin-bottom: 20px;
-  
-  background-color: #fff;
-  
-  padding: 20px;
-  
-  }
-  
-   
-  
-  section h2 {
-  
-  font-size: 20px;
-  
-  margin-bottom: 10px;
-  
-  }
-  
-   
-  
-  section p {
-  
-  font-size: 16px;
-  
-  line-height: 1.5;
-  
-  }
-  
-  ul {
-  
-  list-style-type: none;
-  
-  padding: 0;
-  
-  }
-  
-  
-  ul li {
-  
-  margin-bottom: 5px;
-  
-  }
-  
-  
-  ul li:before {
-  
-  content: “\2022”;
-  
-  margin-right: 5px;
-  
-  }
-  
-  
-  footer {
-  
-  background-color: #5e0392;
-  
-  color: #fff;
-  
-  padding: 10px;
-  
+h1{
   text-align: center;
-  
-  font-size: 14px;
-  
-  }
+  font-family: "Poppins";
+  font-size: 30px;
+  color: #7c4a7b;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 70px;
+  border: 1px solid #0b0b0c;
+  border-radius: 40px;
+  background-color:#53587c ;
+  font-family: "Poppins";
+  background-image: url(https://w.wallhaven.cc/full/0p/wallhaven-0p2ve4.jpg);
+  background-size: cover;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #222179;
+  border-radius: 3px;
+}
+
+input[type="submit"] {
+  background-color: #24229b;
+  color: #f1f1f1;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+  background-color: #551c53;
+}
