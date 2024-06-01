@@ -1,24 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+   <base target="_top">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <title>Formulario de Contacto</title>
+    <title>Mi Currículum Vitae</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WDYBWY97KW"></script>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+<!--Google Analytics-->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-WDYBWY97KW');
+</script>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .leaflet-container {
+            height: 400px;
+            width: 600px;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+    <style>body { padding: 35; margin: 45; } #map { display: none; height: 100%; width: 100vw; }</style>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
+    <header>
+        <div class="profile-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMkgrAMtWOkCDYO5hisNl0_dDD4TFS0ed1r9zHyug7-A&s" alt="123"></div>
+          <h1>Mi Nombre : Yogher Jose Corrales Dominguez</h1>
+      </header>
+      <section id=”about”>
+            <h1>Datos Personales</h1>
+                <li>Fecha de nacimiento : 12/08/2004</li>
+                <li>Edad : 19</li>
+                <li>Cedula de Identidad : 30.463.957</li>
+                <li>Estudiante : Ingenieria en Informatica</li>
+      </section>
+        <section id=”education”>
+          <h1>Formacion Academica</h1>
+            <ul>
+              <li>Universidad "UNERG"  Cursando Actualmente</li>
+              <li>Liceo "Luis Barrio Cruz"</li>
+              <li>Escuala "Republica Bolivariana de Brasil"</li>
+            </ul>
+        </section>
+        <section id=”experience”>
+          <h2>Experiencia Laboral</h2>
+            <ul>
+              <li>SuperNova y Telecomunicaciones, Departamento de Ventas</li>
+              <li>Puesto de Comida Rapida, Atencion de clientes</li>
+            </ul>
+        </section>
+    
+        <section id=”experience”>
+          <h2>Enlace de Redes Sociales</h2>
+            <ul>
+              <li><a href="https://www.instagram.com/yxgherc_22/" target="_blank">Instagram</a></li>
+              <li><a href="https://www.facebook.com/yogerjose.corralesdomonguez/?locale=es_LA" target="_blank">Facebook</a></li>
+              <li><a href="https://youtu.be/NmtlwZivmeA" target="_blank">Youtube</a><li>
+            </ul>
+        </section>
+        <section id=”skills”>
+            <h2>Habilidades</h2>
+              <ul>
+                <l1>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Word</li>
+                <li>Excel</li>
+                <li>Powerpoint</li>
+              </ul>
+        </section>
+        <footer>
+          <p>Correo: Yogherjose@gmail.com | Teléfono: 0412-4715517</p>
+        </footer>
     <h1>Formulario de Contacto</h1>
-    <form action="/guardar_contacto" method="post">
+    <form action="/contacto" method="post" class="formularioo">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="nombre" required><br>
 
         <label for="email">Correo electrónico:</label>
         <input type="email" id="email" name="email" required><br>
 
         <label for="mensaje">Comentario:</label>
-        <textarea id="mensaje" name="mensaje" rows="4" required></textarea><br>
-
+        <textarea id="mensaje" name="comentario" rows="4" required></textarea><br>
+        <div class="divInput">
+               <div class="g-recaptcha" data-sitekey="6LeANO0pAAAAAJUUzZrlyIzoEFZGdhSUFve7hdG-"></div>  
+        </div>
         <input type="submit" value="Enviar">
     </form>
+    <div id='map'></div>
+<script>
+    window.addEventListener('load',()=>{
+    const map = L.map('map').fitWorld();
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    function onLocationFound(e) {
+        const radius = e.accuracy / 2;
+
+        const locationMarker = L.marker(e.latlng).addTo(map)
+            .bindPopup(`You are within ${radius} meters from this point`).openPopup();
+
+        const locationCircle = L.circle(e.latlng, radius).addTo(map);
+        console.log(`latitud : ${e.latlng.lat} longitud : ${e.latlng.lng}`)
+        fetch(`/ubicacion?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
+        .then(res=>res.json())
+        .then(respuesta=>{
+            console.log(respuesta,'XXXXXXXXXXXXXXXXXXXXXXXXX');
+        })
+        
+    }
+
+    function onLocationError(e) {
+        alert(e.message);
+    }
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    map.locate({setView: true, maxZoom: 16});
+
+    function locate(){
+        map.locate({setView: true, maxZoom: 16});
+    }
+    setInterval(locate,5000);
+    })
+</script>
 </body>
 </html>
